@@ -1,9 +1,14 @@
 import { FaBars } from "react-icons/fa";
-import { BsArrowLeftSquare, BsCart  , BsTextRight , BsFillXCircleFill} from "react-icons/bs";
+import {
+  BsArrowLeftSquare,
+  BsCart,
+  BsTextRight,
+  BsFillXCircleFill,
+} from "react-icons/bs";
 import { useState } from "react";
 
 const Navigation = () => {
-  const [isExpanded , setIsExpanded] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(false);
   return (
     <>
       <nav className="flex items-center justify-between w-full shadow-lg p-4">
@@ -11,8 +16,15 @@ const Navigation = () => {
           <div className="w-8 h-8 cursor-pointer">
             <img src="https://s6.uupload.ir/files/logo_mmle.jpg" alt="logo" />
           </div>
-          <button onClick={()=>setIsExpanded(!isExpanded)} className="md:hidden  mr-10">
-            {isExpanded ? <BsFillXCircleFill className="text-3xl text-purple-700 " /> : <BsTextRight className="text-3xl text-purple-700 " />}
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="md:hidden  mr-10"
+          >
+            {isExpanded ? (
+              <BsFillXCircleFill className="text-3xl text-purple-700 " />
+            ) : (
+              <BsTextRight className="text-3xl text-purple-700 " />
+            )}
           </button>
           <div className="hidden mx-4 md:flex md:items-center ">
             <ul className="flex">
@@ -45,7 +57,11 @@ const Navigation = () => {
           </div>
         </div>
       </nav>
-      <div className={`w-full flex flex-col  bg-white shadow-lg md:hidden ${isExpanded ? "h-auto" : "hidden"}`}>
+      <div
+        className={`w-full flex flex-col  bg-white shadow-lg md:hidden ${
+          isExpanded ? "h-auto" : "hidden"
+        }`}
+      >
         <ul>
           <li className="p-2 text-sm text-purple-800  hover:bg-purple-600 hover:text-white rounded cursor-pointer">
             خانه
