@@ -1,11 +1,13 @@
-import { FaBars } from "react-icons/fa";
+
 import {
   BsArrowLeftSquare,
   BsCart,
   BsTextRight,
   BsFillXCircleFill,
+  BsPerson,
 } from "react-icons/bs";
 import { useState } from "react";
+import Link from "next/link";
 
 const Navigation = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -28,9 +30,11 @@ const Navigation = () => {
           </button>
           <div className="hidden mx-4 md:flex md:items-center ">
             <ul className="flex">
-              <li className="mx-2 flex  cursor-pointer items-center p-2 text-sm text-purple-800 hover:text-white hover:bg-purple-600 rounded-lg">
-                خانه
-              </li>
+              <Link href={"/"}>
+                <li className="mx-2 flex  cursor-pointer items-center p-2 text-sm text-purple-800 hover:text-white hover:bg-purple-600 rounded-lg">
+                  خانه
+                </li>
+              </Link>
               <li className="mx-2 flex  cursor-pointer items-center p-2 text-sm  hover:text-white hover:bg-purple-600 rounded-lg">
                 دوره اموزشی
               </li>
@@ -44,17 +48,28 @@ const Navigation = () => {
           </div>
         </div>
         <div className="flex">
-          <div className="mx-4 md:mx-8 cursor-pointer hover:bg-gray-100 p-2 rounded-full">
+          <div className="mx-4 md:mx-8 cursor-pointer relative hover:bg-gray-100 p-2 rounded-full">
+            <span className="absolute top-0 right-0 w-5 h-5 rounded-full bg-red-400 text-white flex justify-center items-center">
+              <span className="mt-1 text-sm">0</span>
+            </span>
             <span className="text-purple-600  text-2xl">
               <BsCart />
             </span>
           </div>
-          <div className="flex items-center justify-center mx-4  p-2 cursor-pointer hover:bg-gray-100 rounded-full">
-            <span className="mx-1 text-purple-600 font-bold text-2xl">
-              <BsArrowLeftSquare />
-            </span>
-            <span className="mx-1 font-bold text-sm text-purple-600">ورود</span>
-          </div>
+          <Link href={"/register"}>
+            <button className="border border-purple-600 text-purple-600 rounded-lg hover:bg-purple-600 hover:text-white flex items-center px-2">
+              <span
+                className="text-2xl ml-2"
+                style={{
+                  transform: " translateY(-4px)",
+                  animation: "dance 0.7s infinite ease-in-out",
+                }}
+              >
+                <BsPerson />
+              </span>
+              <span className="text-xs">ورود یا ثبت نام</span>
+            </button>
+          </Link>
         </div>
       </nav>
       <div
