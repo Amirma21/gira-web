@@ -1,7 +1,10 @@
 import FormsLayout from "../common/FormsLayout";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
 import Link from "next/link";
+import { ToastContainer, toast } from "react-toastify";
+
 const initialValues = {
   email: "",
   password: "",
@@ -35,7 +38,22 @@ const validationSchema = Yup.object({
 });
 
 const Register = () => {
-  const submitHandler = () => {};
+  const submitHandler = async (value) => {
+    const { name, email, phoneNumber, password } = value;
+    const userData = {
+      name,
+      email,
+      phoneNumber,
+      password,
+    };
+    try {
+      const { data } = await axios.post("/api/user", userData);
+      console.log(data);
+      toast.success("ثبت نام شما با موفقیت انجام شد")
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const formik = useFormik({
     initialValues,
@@ -138,19 +156,28 @@ const Register = () => {
                   )}
               </div>
             </div>
-          <button
-            disabled={!formik.isValid}
-            className={`w-full py-1 px-2  rounded-lg my-4 text-white ${
-              formik.isValid
-                ? "gradient "
-                : "bg-purple-500 cursor-not-allowed"
-            }`}
-          >
-            ثبت نام
-          </button>
-        <div className="mt-4 mb-8"><Link href={"/login"}><h2 className="text-sm text-blue-500 cursor-pointer hover:font-bold transition-all ease-out"> از قبل حساب کاربری ساخته اید؟ </h2></Link></div>
+            <button
+              type="submit"
+              disabled={!formik.isValid}
+              className={`w-full py-1 px-2  rounded-lg my-4 text-white ${
+                formik.isValid
+                  ? "gradient "
+                  : "bg-purple-500 cursor-not-allowed"
+              }`}
+            >
+              ثبت نام
+            </button>
+            <div className="mt-4 mb-8">
+              <Link href={"/login"}>
+                <h2 className="text-sm text-blue-500 cursor-pointer hover:font-bold transition-all ease-out">
+                  {" "}
+                  از قبل حساب کاربری ساخته اید؟{" "}
+                </h2>
+              </Link>
+            </div>
           </div>
         </form>
+        <ToastContainer rtl={true} theme="dark" style={{fontFamily:"vazir"}}/>
       </FormsLayout>
     </>
   );
