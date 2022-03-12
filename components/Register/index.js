@@ -49,9 +49,14 @@ const Register = () => {
     try {
       const { data } = await axios.post("/api/user", userData);
       console.log(data);
-      toast.success("ثبت نام شما با موفقیت انجام شد")
+      toast.success("ثبت نام شما با موفقیت انجام شد");
     } catch (error) {
-      console.log(error);
+      if (error.response.status === 400) {
+        console.log(error.response);
+        toast.error(error.response.data.error);
+      } else {
+        toast.error("مشکلی پیش آماده است");
+      }
     }
   };
 
@@ -177,7 +182,11 @@ const Register = () => {
             </div>
           </div>
         </form>
-        <ToastContainer rtl={true} theme="dark" style={{fontFamily:"vazir"}}/>
+        <ToastContainer
+          rtl={true}
+          theme="dark"
+          style={{ fontFamily: "vazir" }}
+        />
       </FormsLayout>
     </>
   );
