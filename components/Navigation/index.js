@@ -1,4 +1,3 @@
-
 import {
   BsArrowLeftSquare,
   BsCart,
@@ -6,11 +5,15 @@ import {
   BsFillXCircleFill,
   BsPerson,
 } from "react-icons/bs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useAuthContext } from "../../context/AuthContext";
+import Avatar from "../Avatar/Avatar";
 
 const Navigation = () => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const { state } = useAuthContext();
+
   return (
     <>
       <nav className="flex items-center justify-between w-full shadow-lg p-4">
@@ -48,6 +51,24 @@ const Navigation = () => {
           </div>
         </div>
         <div className="flex">
+          {state ? (
+            <Avatar />
+          ) : (
+            <Link href={"/register"}>
+              <button className="border border-purple-600 text-purple-600 rounded-lg hover:bg-purple-600 hover:text-white flex items-center px-2">
+                <span
+                  className="text-2xl ml-2"
+                  style={{
+                    transform: " translateY(-4px)",
+                    animation: "dance 0.7s infinite ease-in-out",
+                  }}
+                >
+                  <BsPerson />
+                </span>
+                <span className="text-xs">ورود یا ثبت نام</span>
+              </button>
+            </Link>
+          )}
           <div className="mx-4 md:mx-8 cursor-pointer relative hover:bg-gray-100 p-2 rounded-full">
             <span className="absolute top-0 right-0 w-5 h-5 rounded-full bg-red-400 text-white flex justify-center items-center">
               <span className="mt-1 text-sm">0</span>
@@ -56,20 +77,6 @@ const Navigation = () => {
               <BsCart />
             </span>
           </div>
-          <Link href={"/register"}>
-            <button className="border border-purple-600 text-purple-600 rounded-lg hover:bg-purple-600 hover:text-white flex items-center px-2">
-              <span
-                className="text-2xl ml-2"
-                style={{
-                  transform: " translateY(-4px)",
-                  animation: "dance 0.7s infinite ease-in-out",
-                }}
-              >
-                <BsPerson />
-              </span>
-              <span className="text-xs">ورود یا ثبت نام</span>
-            </button>
-          </Link>
         </div>
       </nav>
       <div
