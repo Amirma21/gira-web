@@ -47,7 +47,7 @@ const Register = () => {
       password,
     };
     try {
-      const { data } = await axios.post("/api/user", userData);
+      const { data } = await axios.post("/api/auth/register", userData);
       console.log(data);
       toast.success("ثبت نام شما با موفقیت انجام شد");
     } catch (error) {

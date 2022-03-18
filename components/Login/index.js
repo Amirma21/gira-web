@@ -2,9 +2,10 @@ import FormsLayout from "../common/FormsLayout";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Link from "next/link";
-
-
-
+import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import { useRouter } from "next/router";
+import { useAuthContext } from "../../context/AuthContext";
 
 const initialValues = { email: "", password: "" };
 
@@ -19,8 +20,26 @@ const validationSchema = Yup.object({
 });
 
 const Login = () => {
+  const { state, setState } = useAuthContext();
+
+  const router = useRouter();
+
   const submitHandler = async (value) => {
-    console.log("loged");
+    try {
+      const { data } = await axios.post("/api/auth/login", value);
+      console.log(data);
+      router.push("/");
+      toast.success("با موفقیت وارد شدید")
+    } catch (err) {
+      const errorMessage = err.response.data.error;
+      toast.error(errorMessage);
+    }
+    try {
+      const { data } = await axios.get("/api/auth/user");
+      setState({ token: data.token });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const formik = useFormik({
@@ -79,9 +98,16 @@ const Login = () => {
               ورود
             </button>
 
-            <div className="mt-4 mb-8"><Link href={"/register"}><h2 className="text-sm text-blue-500 cursor-pointer hover:font-bold transition-all ease-out">ایجاد حساب کاربری ؟</h2></Link></div>
+            <div className="mt-4 mb-8">
+              <Link href={"/register"}>
+                <h2 className="text-sm text-blue-500 cursor-pointer hover:font-bold transition-all ease-out">
+                  ایجاد حساب کاربری ؟
+                </h2>
+              </Link>
+            </div>
           </div>
         </form>
+
       </FormsLayout>
     </>
   );
