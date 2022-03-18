@@ -16,9 +16,8 @@
 //   hashPassword,
 // };
 
-
-
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const hashPassword = (password) => {
   return new Promise((resolve, reject) => {
@@ -33,6 +32,26 @@ const hashPassword = (password) => {
   });
 };
 
+const comparePasswords = (passwordAttempt, hashedpasswords) => {
+  return bcrypt.compare(passwordAttempt, hashedpasswords);
+};
+
+const createToken = ({ name, password, email, phoneNumber }) => {
+  if ((!name, !password, !email, !phoneNumber)) {
+    throw new Error("value is not complited");
+  }
+  return jwt.sign(
+    { name, password, email, phoneNumber },
+    process.env.JWT_SECRET_KEY,
+    {
+      expiresIn:process.env.JWT_EXPIRES,
+      algorithm:"HS256"
+    }
+  );
+};
+
 module.exports = {
-    hashPassword
-}
+  hashPassword,
+  comparePasswords,
+  createToken,
+};
