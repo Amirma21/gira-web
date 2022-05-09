@@ -15,7 +15,7 @@ const Present = () => {
 
   return (
     <>
-      <div className="justify-between items-center flex flex-wrap mx-auto mt-20 py-8 px-2 bg-gray-50">
+      <div className="justify-between items-center flex flex-wrap mx-auto mt-20  px-2 bg-gray-50">
         <div className="relative mx-auto" style={{ maxWidth: "630px" }}>
           <img
             className="w-full"
