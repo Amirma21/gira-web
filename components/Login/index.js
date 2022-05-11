@@ -89,11 +89,10 @@ const Login = () => {
             </div>
             <button
               disabled={!formik.isValid}
-              className={`w-full p-1 rounded-lg my-4 text-white ${
-                formik.isValid
-                  ? "gradient  "
-                  : "bg-purple-500 cursor-not-allowed"
-              }`}
+              className={`w-full p-1 rounded-lg my-4 text-white ${formik.isValid
+                ? "gradient  "
+                : "bg-purple-500 cursor-not-allowed"
+                }`}
             >
               ورود
             </button>
