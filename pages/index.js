@@ -1,10 +1,17 @@
-
 import Header from "../components/Header";
-import Navigation from "../components/Navigation";
-import styles from "../styles/Home.module.css";
+import Present from "../components/Presentation";
+import ScrollIndicator from "../components/tools/ScrollIndicator";
+import Statistics from "../components/Statistics";
+
 
 export default function Home() {
-  return <div>
-<Header />
-  </div>;
+  console.log();
+  return (
+    <div>
+      <ScrollIndicator />
+      <Header />
+      <Present />
+      <Statistics />
+    </div>
+  );
 }
